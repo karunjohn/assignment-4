@@ -70,22 +70,7 @@ function deleteHospitalById(id) {
 }
 
 
-// const newHospital = createHospital('New Hospital', 100, { city: 'AmericaJun',district:"kozhikod", country: 'india' });
-// console.log('New hospital:', newHospital);
-// const updatedHospital = updateHospitalById(2, { patient_count: 80 });
-
-//..........get request
-// console.log(getHospitalById(2))
-
-//...........update
-// console.log(updateHospitalById(2,{patient_count:100}))
-
-//...........del
-// console.log(deleteHospitalById(7))
-
-
-//.......................// router
-
+//get element
 app.get('/',(req,res)=>{
   res.json(readDataFromFile())
 })
@@ -102,11 +87,21 @@ app.post('/',(req,res)=>{
   res.json( createHospital(name,patientCount,location))
 })
 
+//put
+app.put('/:id',(req,res)=>{
+  const {name,patientCount,location}=req.body
+  const hospital= updateHospitalById(Number(req.params.id),{name,patientCount,location})
+  console.log(hospital)
+  res.json(hospital)
+})
 
-
-
-
-
+//delete
+app.delete('/:id',(req,res)=>{
+  const {name,patientCount,location}=req.body
+  const hospital= deleteHospitalById(Number(req.params.id))
+  console.log(hospital)
+  res.json(hospital)
+})
 
 //server
 app.listen(3000,()=>{
