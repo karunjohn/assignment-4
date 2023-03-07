@@ -31,6 +31,7 @@ function createHospital(name, patientCount, location) {
   return newHospital;
 }
 
+
 // Get a hospital object by ID
 function getHospitalById(id) {
   const data = readDataFromFile();
@@ -62,12 +63,25 @@ function deleteHospitalById(id) {
 }
 
 
-const newHospital = createHospital('New Hospital', 100, { city: 'AmericaJun',district:"kozhikod" country: 'india' });
-console.log('New hospital:', newHospital);
+// const newHospital = createHospital('New Hospital', 100, { city: 'AmericaJun',district:"kozhikod", country: 'india' });
+// console.log('New hospital:', newHospital);
+// const updatedHospital = updateHospitalById(2, { patient_count: 80 });
 
-const updatedHospital = updateHospitalById(2, { patient_count: 80 });
+//..........get request
+// console.log(getHospitalById(2))
+
+//...........update
+// console.log(updateHospitalById(2,{patient_count:100}))
+
+//...........del
+// console.log(deleteHospitalById(7))
 
 
+//.......................// router
+
+app.get('/',(req,res)=>{
+  res.json(readDataFromFile())
+})
 
 app.listen(3000,()=>{
     console.log(`this server is working`)
