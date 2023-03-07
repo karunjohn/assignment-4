@@ -1,6 +1,9 @@
 const express=require('express')
 const app=new express()
 
+const logger=require('morgan')
+app.use(logger("combined"))
+
 app.use(express.json())//parse json data
 app.use(express.urlencoded({extended:true}))
 
@@ -37,8 +40,9 @@ function createHospital(name, patientCount, location) {
 
 // Get a hospital object by ID
 function getHospitalById(id) {
+  console.log(id)
   const data = readDataFromFile();
-  return data.hospitals.find((hospital) => hospital.id === id);
+  return data.hospitals.find((hospital) => hospital.id ===id);
 }
 
 // Update a hospital object by ID
@@ -87,9 +91,17 @@ app.get('/',(req,res)=>{
 })
 //get by ID
 app.get('/:id',(req,res)=>{
-  res.json(getHospitalById(req.params.id))
+  const hospital=getHospitalById(Number(req.params.id))
+  console.log(hospital)
+  res.json(hospital)
 })
 
+
+
+
+
+
+//server
 app.listen(3000,()=>{
     console.log(`this server is working`)
 })
