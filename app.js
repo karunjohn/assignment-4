@@ -1,6 +1,9 @@
 const express=require('express')
 const app=new express()
 
+app.use(express.json())//parse json data
+app.use(express.urlencoded({extended:true}))
+
 const fs = require('fs');
 
 const FILE_PATH = './db.json';
@@ -81,6 +84,10 @@ function deleteHospitalById(id) {
 
 app.get('/',(req,res)=>{
   res.json(readDataFromFile())
+})
+//get by ID
+app.get('/:id',(req,res)=>{
+  res.json(getHospitalById(req.params.id))
 })
 
 app.listen(3000,()=>{
