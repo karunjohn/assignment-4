@@ -96,6 +96,13 @@ app.get('/:id',(req,res)=>{
   res.json(hospital)
 })
 
+//post 
+app.post('/',(req,res)=>{
+  const {name,patientCount,location}=req.body
+  res.json( createHospital(name,patientCount,location))
+})
+
+
 
 
 
